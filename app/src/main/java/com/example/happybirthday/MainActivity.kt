@@ -78,7 +78,8 @@ fun GreetingText(message: String, from: String, modifier: Modifier) {
 
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.cat)
+    val image = painterResource(R.drawable.cat2)
+    val image2 = painterResource(R.drawable.cat)
     Box(modifier) {
         Image( // ca cest en fond, cest ce qui est au debut cest ce qui est en arriere plan genre z-index le plus bas (1)
             painter = image,
@@ -91,12 +92,10 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
                 .fillMaxSize()
                 .padding(8.dp)
         )
-        GreetingText(
-            message = "oooooo",
-            from = from,
-            modifier = modifier
-                .fillMaxSize()
-                .padding(8.dp)
+        Image( // ca cest en fond, cest ce qui est au debut cest ce qui est en arriere plan genre z-index le plus bas (1)
+            painter = image2,
+            contentDescription = null , // alt pr limage
+            modifier =  modifier.align(Alignment.BottomCenter)
         )
 
     }
