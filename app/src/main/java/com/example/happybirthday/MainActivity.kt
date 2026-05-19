@@ -8,7 +8,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,12 +77,14 @@ fun GreetingText(message: String, from: String, modifier: Modifier) {
 
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.cat2)
-    val image2 = painterResource(R.drawable.cat)
+    val image = painterResource(R.drawable.androidparty)
+
     Box(modifier) {
         Image( // ca cest en fond, cest ce qui est au debut cest ce qui est en arriere plan genre z-index le plus bas (1)
             painter = image,
-            contentDescription = null // alt pr limage
+            contentDescription = null, // alt pr limage
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
         )
         GreetingText( // le texte est par dessus limage
             message = message,
@@ -92,11 +93,7 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
                 .fillMaxSize()
                 .padding(8.dp)
         )
-        Image( // ca cest en fond, cest ce qui est au debut cest ce qui est en arriere plan genre z-index le plus bas (1)
-            painter = image2,
-            contentDescription = null , // alt pr limage
-            modifier =  modifier.align(Alignment.BottomCenter)
-        )
+
 
     }
 }
@@ -109,6 +106,22 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun BirthdayCardPreview() { // permet de visualiser la fonction Greeting
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Jouana!", from = "From Samantha")
+        Scaffold( // pr chaque fenetre, element + grandd
+            modifier = Modifier.fillMaxSize(),
+            containerColor = MaterialTheme.colorScheme.background
+        ) { innerPadding ->
+            Surface( // pr + petits elements, y en a plusieurs
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                color = MaterialTheme.colorScheme.background
+
+            ) {
+                GreetingImage(
+                    "Happy Birthday Jouana!",
+                    from = "From Samantha",
+                )
+            }
+        }
     }
 }
