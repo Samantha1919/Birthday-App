@@ -1,5 +1,4 @@
 package com.example.happybirthday
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,9 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,8 +43,8 @@ class MainActivity : ComponentActivity() {
 
                     ) {
                         GreetingImage(
-                            "Happy Birthday Jouana!",
-                            from = "From Samantha",
+                            message = stringResource(R.string.happy_birthday_text), // R c pr dire le nom du dossier res et c une convention de nommmage
+                            from = stringResource(R.string.signature_text),
                         )
                     }
                 }
@@ -61,24 +60,25 @@ fun GreetingText(message: String, from: String, modifier: Modifier) {
         modifier = modifier.padding(8.dp)
     ) {
         Text(
-            text = message,
+            text = message, // la on definit sur quel texte on met le style
             fontSize = 100.sp,
             lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center, // centre le texte
+         // il faut declarer le modifier = Modifier pour y ajouter du .padding(16.dp)
         )
         Text(
-            text = from,
+            text = from, // la on definit sur quel texte on met le style
             fontSize = 36.sp,
             modifier = Modifier
                 .padding(16.dp)
-                .align(alignment = Alignment.End)
+                .align(alignment = Alignment.CenterHorizontally) // ou va se placer toute la boite qui entoure le texte genre dans laquelle le texte est
         )
     }
 }
 
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.androidparty)
+    val image = painterResource(R.drawable.androidparty) // R c pr dire le nom du dossier res et c une convention de nommmage
 
     Box(modifier) {
         Image( // ca cest en fond, cest ce qui est au debut cest ce qui est en arriere plan genre z-index le plus bas (1)
@@ -93,7 +93,6 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
             modifier = modifier
                 .fillMaxSize()
                 .padding(8.dp)
-                .alpha(0.5F)
         )
 
 
@@ -120,8 +119,8 @@ fun BirthdayCardPreview() { // permet de visualiser la fonction Greeting
 
             ) {
                 GreetingImage(
-                    "Happy Birthday Jouana!",
-                    from = "From Samantha",
+                    message = stringResource(R.string.happy_birthday_text), // R c pr dire le nom du dossier res et c une convention de nommmage
+                    from = stringResource(R.string.signature_text),
                 )
             }
         }
